@@ -6,5 +6,5 @@ Foi utilizado conhecimentos básicos de HTML, CSS e JS. Caso tenha alguma sugest
 
 [LinkedIn](https://www.linkedin.com/in/nicolasoliveiragoldner/)
 
-[Site da Calculadora](https://nicolasgoldner.github.io/Calculadora/)
+
 
