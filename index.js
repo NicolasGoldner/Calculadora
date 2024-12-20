@@ -14,6 +14,12 @@ document.getElementById("clear").addEventListener("click", function()
     input.focus()
 })
 
+document.getElementById("clear2").addEventListener("click", function()
+{
+    result.value = ""
+    result.focus()
+})
+
 charkeys.forEach(function(btnKey)
 {
     btnKey.addEventListener("click", function()
@@ -28,16 +34,16 @@ charkeys.forEach(function(btnKey)
 //muda o tema
 document.getElementById("themeSwitch").addEventListener("click", function () {
     if (main.dataset.theme === "dark") {
-      root.style.setProperty("--bg-color", "#f1f5f9")
-      root.style.setProperty("--border-color", "#aaa")
-      root.style.setProperty("--font-color", "#212529")
-      root.style.setProperty("--primary-color", "#26834a")
+      root.style.setProperty("--bg-color", "#BFB0A3")
+      root.style.setProperty("--border-color", "#000")
+      root.style.setProperty("--font-color", "#592F16")
+      root.style.setProperty("--primary-color", "#8C5B3E")
       main.dataset.theme = "light"
     } else {
       root.style.setProperty("--bg-color", "#212529")
       root.style.setProperty("--border-color", "#666")
       root.style.setProperty("--font-color", "#f1f5f9")
-      root.style.setProperty("--primary-color", "#4dff91")
+      root.style.setProperty("--primary-color", "#AFF24B")
       main.dataset.theme = "dark"
     }
   })
@@ -73,6 +79,29 @@ function calculate()
   let resultado = input.value
   
   resultado = resultado.split('');
+  console.log(resultado)
+  // Faz o fatorial, tira os algorismo antes do ! e depois subistitui o valor final no lugar do !
+  for (let i = 0; i < resultado.length; i++)
+  {
+    if (resultado[i] === '!')
+    {
+      x = 0
+      temp = []
+      while(!isNaN(resultado[i - x - 1]) && resultado[i - x - 1] !== ' ')
+      {
+        
+        temp.push(resultado[i - x - 1])
+        resultado[i - x - 1] = ""
+        x++
+      }
+      
+      let numero = Number(temp.reverse().join(''))
+      resultado[i] = fat(numero)
+      
+    }
+  }
+
+
   resultado = resultado.map(function(valor, index, arr)
   {
     //Transforma o simbolo PI em seu valo matematico
@@ -94,34 +123,7 @@ function calculate()
       }
       return Math.sqrt(raiz).toString()
     }
-    //Seleciona todos os valores após o ! e faz a operação de fatorial onde N*N-1...*1
-    else if (valor === '!')
-    {
-      let x = 1
-      let fatorial = ""
-        while(!isNaN(arr[index + x]) && arr[index + x] !== ' ')
-        {
-          fatorial += arr[index + x]
-          arr[index + x] = ''
-          x++
-        }
-      fatorial = parseInt(fatorial)
-      let fat = 1
-        if(fatorial <= 0 )
-        {
-         return "1"
-        }else
-        {
-          while( fatorial > 0)
-        {
-          fat = fat*fatorial
-          fatorial--
-        }
-      }
-      return fat.toString()
-      
-    }
-    
+        
 
     //caso não se encaixe em nenhum desses, retorna o valor ou simbolo
     else
@@ -129,6 +131,7 @@ function calculate()
       return valor
     }
   })
+  
 
   //Substitui ^ pelo operador correto de potencia achei isso no StackOverflow: replace(/\^/g, '**')
   resultado = resultado.join('').replace(/\^/g, '**')
@@ -163,3 +166,13 @@ document.getElementById("copy").addEventListener("click", function(ev)
 })
 
 
+function fat(number)
+{
+  if(number === 0)
+  {
+    return 1
+  }else
+  {
+    return number * fat(number - 1)
+  }
+}
