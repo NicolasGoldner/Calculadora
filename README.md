@@ -2,7 +2,7 @@
 
 #### Description:
 ## Link
-[Site](https://nicolasgoldner.github.io/Calculadora/)
+[Calculator](https://nicolasgoldner.github.io/Calculadora/)
 ## Overview
 
 The project consists of three main files: `index.html`, `index.css`, and `index.js`. Each file plays a crucial role in building a functional and interactive calculator.
